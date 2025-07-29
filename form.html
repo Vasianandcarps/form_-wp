@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mietbestätigung Formular</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f6f6f6;
+    }
+
+    .form-container {
+      max-width: 700px;
+      margin: auto;
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 30px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #e67e22;
+      margin-bottom: 30px;
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 20px;
+      display: block;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px 14px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      background-color: #fff;
+      transition: border 0.3s;
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+      margin-left: 10px;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #e67e22;
+      outline: none;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      background-color: #e67e22;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 30px;
+      display: block;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #cf711e;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Mietbestätigung Formular</h2>
+    <form method="post" accept-charset="UTF-8" action="generate_pdf.php">
+ <label>Erstellung einer Mietbestätigung für</label>
+  <input type="radio" name="anrede" value="Frau" required /> Frau
+  <input type="radio" name="anrede" value="Herr" /> Herr
+  <input type="radio" name="anrede" value="divers" /> divers
+
+  <label>Tel.: (für Rückfragen)</label>
+  <input name="telefon" type="text" placeholder="Telefonnummer" />
+
+  <!-- Bestehende Felder -->
+  
+      <input name="name" placeholder="Name" required />
+      <input name="vorname" placeholder="Vorname" required />
+       <label>Geburtsdatum</label>
+      <input name="geburtsdatum" type="date" required />
+
+      <!-- Alter Adresse -->
+      <input name="alt_strasse" placeholder="Alte Straße" required />
+      <input name="alt_plz" placeholder="Alte PLZ" required />
+      <input name="alt_ort" placeholder="Alter Ort" required />
+
+      <!-- Neue Adresse -->
+      <input name="neu_strasse" placeholder="Neue Straße" required />
+      <input name="neu_plz" placeholder="Neue PLZ" required />
+      <input name="neu_ort" placeholder="Neuer Ort" required />
+
+      <label for="einzugsdatum">Einzugsdatum</label>
+      <input name="einzugsdatum" type="date" required />
+
+      <!-- Zusatzfragen -->
+      <label>Beziehen Sie bereits Leistungen des Jobcenters Augsburg?</label>
+      <input type="radio" name="jobcenter" value="ja" required /> Ja
+      <input type="radio" name="jobcenter" value="nein" /> Nein
+
+      <label>Briefkasten beschriftet?</label>
+      <input type="radio" name="briefkasten" value="ja" required /> Ja
+      <input type="radio" name="briefkasten" value="nein" /> Nein
+
+      <label>Anmeldung bei der Stadt Augsburg bereits erledigt?</label>
+      <input type="radio" name="anmeldung" value="ja" required /> Ja
+      <input type="radio" name="anmeldung" value="nein" /> Nein
+
+      <label>Aufgeschlüsselte Kosten für Grundmiete, kalte Betriebskosten, Heizkosten vorhanden?</label>
+      <input type="radio" name="kostenaufstellung" value="ja" required /> Ja
+      <input type="radio" name="kostenaufstellung" value="nein" /> Nein
+
+      <label for="wohnflaeche">Wieviel Quadratmeter Wohnfläche besitzt die neue Wohnung?</label>
+      <input name="wohnflaeche" placeholder="z. B. 75" type="number" min="1" required />
+
+      <label for="anzahl_personen">Wie viele Personen werden in der Wohnung wohnen?</label>
+      <input name="anzahl_personen" type="number" min="1" required />
+
+      <label>Beziehen bereits andere Personen in der Wohnung Leistungen des Jobcenters Augsburg?</label>
+      <input type="radio" name="andere_leistungen" value="ja" required /> Ja
+      <input type="radio" name="andere_leistungen" value="nein" /> Nein
+
+      <label>Name (wenn ja)</label>
+      <input name="andere_name" type="text" placeholder="Name der anderen Person" />
+
+      <label>BG-Nummer (wenn ja)</label>
+      <input name="bg_nummer" type="text" placeholder="BG-Nummer" />
+
+      <!-- НОВЫЕ ПОЛЯ ДЛЯ ВТОРОЙ СТРАНИЦЫ -->
+      <label>Gehören alle Personen zur Familie?</label>
+      <input type="radio" name="alle_familie" value="ja" required /> Ja
+      <input type="radio" name="alle_familie" value="nein" /> Nein
+
+      <label>Um welche Familienangehörigen handelt es sich?</label>
+      <textarea name="familienangehoerige" rows="2" placeholder="z.B. Partner, Mutter, Vater..."></textarea>
+
+      <label>Gehören Personen über 25 Jahren der Familie an?</label>
+      <input type="radio" name="personen_ueber_25" value="ja" required /> Ja
+      <input type="radio" name="personen_ueber_25" value="nein" /> Nein
+
+      <label>Wenn ja, wie viele?</label>
+      <input type="number" name="anzahl_personen_ueber_25" min="0" />
+
+      <label>Handelt es sich um eine Wohngemeinschaft?</label>
+      <input type="radio" name="wohngemeinschaft" value="ja" required /> Ja
+      <input type="radio" name="wohngemeinschaft" value="nein" /> Nein
+
+      <label>Hat jede Person einen eigenen Mietvertrag?</label>
+      <input type="radio" name="eigener_mietvertrag" value="ja" required /> Ja
+      <input type="radio" name="eigener_mietvertrag" value="nein" /> Nein
+
+      <label>Gibt es Untermietverträge?</label>
+      <input type="radio" name="untermietvertraege" value="ja" required /> Ja
+      <input type="radio" name="untermietvertraege" value="nein" /> Nein
+
+      <label>Welchen Grund haben Sie für Ihren Umzug?</label>
+      <textarea name="umzugsgrund" rows="5" placeholder="Bitte Grund eingeben..."></textarea>
+
+      <button type="submit">PDF generieren</button>
+    </form>
+  </div>
+
+</body>
+</html>
